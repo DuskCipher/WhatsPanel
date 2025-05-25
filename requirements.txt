@@ -1,0 +1,23 @@
+# === Core Framework ===
+streamlit
+streamlit-option-menu
+streamlit-ace
+
+# === Script Analysis & Utilities ===
+black
+autopep8
+pyflakes
+pyminifier
+
+# === Data & File Handling ===
+pandas
+fpdf
+Pillow
+requests
+
+# === Encryption & Security ===
+cryptography
+
+# === Optional Features ===
+plotly
+cloudinary
