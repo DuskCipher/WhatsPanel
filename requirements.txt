@@ -11,3 +11,4 @@ requests
 cryptography
 plotly
 cloudinary
+setuptools>=65.5.0
