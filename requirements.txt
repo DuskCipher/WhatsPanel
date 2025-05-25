@@ -12,3 +12,4 @@ cryptography
 plotly
 cloudinary
 setuptools
+python-minifier==2.10.0
