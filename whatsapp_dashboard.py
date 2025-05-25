@@ -23,7 +23,7 @@ from streamlit_option_menu import option_menu
 from streamlit_ace import st_ace
 
 st.set_page_config(
-    page_title="WA Sender Blasting",
+    page_title="WhatsPanel 2.1",
     page_icon="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg",  # WhatsApp icon
     layout="wide"
 )
@@ -258,7 +258,7 @@ if menu == "Logout":
 
 # --- Konten Menu --
 if menu == "Pengaturan & Input":
-    st.title("📱 Dashboard Blasting Bengkel Version 0.2 Beta")
+    st.title("📱 Dashboard WhatsPanel Blasting Version 2.1")
     st.markdown("Versi interaktif menggunakan API WA Panel dengan Excel, input manual, dan dukungan gambar.")
 
     st.subheader("📝 Pengaturan Pesan")
