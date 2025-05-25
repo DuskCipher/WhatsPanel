@@ -4,7 +4,6 @@ streamlit-ace
 black
 autopep8
 pyflakes
-pyminifier
 pandas
 fpdf
 Pillow
