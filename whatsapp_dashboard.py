@@ -1,38 +1,17 @@
-import os
-import io
+# ===[ IMPORT MODULE ]===
 import time
-import json
-import base64
-import sqlite3
-import platform
-import subprocess
-from pathlib import Path
-from datetime import datetime
-
 import pandas as pd
-import requests
-from PIL import Image
-from fpdf import FPDF
 from cryptography.fernet import Fernet
-
 import streamlit as st
-from streamlit_ace import st_ace
 from streamlit_option_menu import option_menu
 
-import plotly.express as px
-import plotly.graph_objects as go
-
-import cloudinary
-import cloudinary.uploader
-
-# Konfigurasi halaman
+# ===[ PAGE CONFIG & SESSION STATE ]===
 st.set_page_config(
     page_title="WhatsPanel 2.1",
     page_icon="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg",
     layout="wide",
 )
 
-# Inisialisasi session state
 defaults = {
     "logged_in": False,
     "appkey": "",
@@ -43,10 +22,9 @@ defaults = {
     "encryption_key": Fernet.generate_key(),
 }
 for key, value in defaults.items():
-    if key not in st.session_state:
-        st.session_state[key] = value
+    st.session_state.setdefault(key, value)
 
-# Jika belum login, tampilkan form login
+# ===[ LOGIN SECTION – DO NOT CHANGE ]===
 if not st.session_state.logged_in:
     col1, col2 = st.columns([1, 1.2], gap="large")
 
@@ -90,30 +68,7 @@ if not st.session_state.logged_in:
 
         st.stop()
 
-# Styling sidebar
-st.sidebar.markdown(
-    """
-    <style>
-    .sidebar-copyright {
-        position: fixed;
-        bottom: 10px;
-        left: 0;
-        width: 250px;
-        text-align: center;
-        font-size: 15px;
-        color: #888;
-        padding: 5px 10px;
-        opacity: 0.7;
-    }
-    </style>
-    <div class='sidebar-copyright'>
-        © 2025 Bengkel Mobil Purwokerto<br>Bengkel Kaki Mobil Arumsari
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-# Tambahan styling
+# ===[ GLOBAL STYLE ]===
 st.markdown(
     """
     <style>
@@ -133,26 +88,32 @@ st.markdown(
         transform: scale(1.01);
     }
     @media screen and (max-width: 768px) {
-        .block-container {
-            padding: 1rem;
-        }
+        .block-container {padding: 1rem;}
         .css-1v0mbdj, .stColumn {
             width: 100% !important;
             flex: 1 1 100% !important;
         }
     }
-    .login-box {
-        background-color: #1e1e1e;
-        padding: 2rem;
-        border-radius: 1rem;
-        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    .sidebar-copyright {
+        position: fixed;
+        bottom: 10px;
+        left: 0;
+        width: 250px;
+        text-align: center;
+        font-size: 15px;
+        color: #888;
+        padding: 5px 10px;
+        opacity: 0.7;
     }
     </style>
+    <div class='sidebar-copyright'>
+        © 2025 Bengkel Mobil Purwokerto<br>Bengkel Kaki Mobil Arumsari
+    </div>
     """,
     unsafe_allow_html=True,
 )
 
-# Import modul fitur dashboard
+# ===[ IMPORT FITUR DASHBOARD ]===
 from tools.script_tool import show_script_tool
 from dashboard.api_key_manager import show_api_key_manager
 from dashboard.notepad import show_notepad
@@ -162,24 +123,18 @@ from dashboard.analisis_pengiriman import show_analisis_pengiriman
 from dashboard.kirim_pesan import show_kirim_pesan
 from dashboard.pengaturan_input import show_pengaturan_input
 
-# Sidebar menu
+# ===[ SIDEBAR MENU ]===
 with st.sidebar:
     menu = option_menu(
         "Dashboard Panel",
         [
-            "Pengaturan & Input",
-            "Kirim Pesan",
-            "Analisis Pengiriman",
-            "Terminal",
-            "Tool Khusus Oli",
-            "Script Tool",
-            "NotePad",
-            "Manajemen API",
-            "Logout",
+            "Pengaturan & Input", "Kirim Pesan", "Analisis Pengiriman",
+            "Terminal", "Tool Khusus Oli", "Script Tool",
+            "NotePad", "Manajemen API", "Logout",
         ],
         icons=[
-            "gear", "send", "bar-chart", "terminal", "send",
-            "code-slash", "journal-text", "key", "box-arrow-right"
+            "gear", "send", "bar-chart", "terminal", "droplet",
+            "code-slash", "journal-text", "key", "box-arrow-right",
         ],
         menu_icon="chat-dots",
         default_index=0,
@@ -187,48 +142,31 @@ with st.sidebar:
             "container": {"padding": "5!important", "background-color": "#1E1E1E"},
             "icon": {"color": "#FFA500", "font-size": "20px"},
             "nav-link": {
-                "font-size": "16px",
-                "text-align": "left",
-                "margin": "0px",
-                "--hover-color": "#333333",
-                "color": "#CCCCCC",
+                "font-size": "16px", "text-align": "left", "margin": "0px",
+                "--hover-color": "#333333", "color": "#CCCCCC",
             },
             "nav-link-selected": {
-                "background-color": "#FFA500",
-                "color": "black",
-                "font-weight": "bold",
+                "background-color": "#FFA500", "color": "black", "font-weight": "bold",
             },
         },
     )
 
-# Routing menu
-if menu == "Pengaturan & Input":
-    show_pengaturan_input()
+# ===[ MENU ROUTING ]===
+pages = {
+    "Pengaturan & Input": show_pengaturan_input,
+    "Kirim Pesan": show_kirim_pesan,
+    "Analisis Pengiriman": show_analisis_pengiriman,
+    "Terminal": show_terminal,
+    "Tool Khusus Oli": show_tool_oli,
+    "Script Tool": show_script_tool,
+    "NotePad": show_notepad,
+    "Manajemen API": show_api_key_manager,
+}
 
-elif menu == "Kirim Pesan":
-    show_kirim_pesan()
-
-elif menu == "Analisis Pengiriman":
-    show_analisis_pengiriman()
-
-elif menu == "Terminal":
-    show_terminal()
-
-elif menu == "Tool Khusus Oli":
-    show_tool_oli()
-
-elif menu == "NotePad":
-    show_notepad()
-
-elif menu == "Script Tool":
-    show_script_tool()
-
-elif menu == "Manajemen API":
-    show_api_key_manager()
-
-elif menu == "Logout":
+if menu == "Logout":
     for key in ["logged_in", "appkey", "authkey"]:
-        if key in st.session_state:
-            del st.session_state[key]
-    st.success("\u2705 Logout berhasil! Sampai jumpa.")
+        st.session_state.pop(key, None)
+    st.success("✅ Logout berhasil! Sampai jumpa.")
     st.rerun()
+else:
+    pages.get(menu, lambda: st.warning("Halaman tidak ditemukan"))()
