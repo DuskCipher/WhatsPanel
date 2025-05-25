@@ -1,5 +1,14 @@
-streamlit>=1.32.0
+streamlit
+streamlit-option-menu
+streamlit-ace
+black
+autopep8
+pyflakes
+pyminifier
 pandas
+fpdf
+Pillow
 requests
-python-dotenv
-streamlit-extras
+cryptography
+plotly
+cloudinary
