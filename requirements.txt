@@ -1,23 +1,5 @@
-# === Core Framework ===
-streamlit
-streamlit-option-menu
-streamlit-ace
-
-# === Script Analysis & Utilities ===
-black
-autopep8
-pyflakes
-pyminifier
-
-# === Data & File Handling ===
+streamlit>=1.32.0
 pandas
-fpdf
-Pillow
 requests
-
-# === Encryption & Security ===
-cryptography
-
-# === Optional Features ===
-plotly
-cloudinary
+python-dotenv
+streamlit-extras
