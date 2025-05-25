@@ -11,4 +11,5 @@ requests
 cryptography
 plotly
 cloudinary
-setuptools>=65.5.0
+setuptools
+python_minifier
