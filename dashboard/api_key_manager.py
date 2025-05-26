@@ -1,14 +1,13 @@
-# tools/api_key_manager.py
-
 import streamlit as st
 
-# Inisialisasi session state untuk appkey dan authkey
-if "appkey" not in st.session_state:
-    st.session_state["appkey"] = ""
-if "authkey" not in st.session_state:
-    st.session_state["authkey"] = ""
+# ====[ INISIALISASI SESSION STATE ]====
+# Pastikan session_state memiliki kunci "appkey" dan "authkey"
+for key in ["appkey", "authkey"]:
+    st.session_state.setdefault(key, "")
 
+# ====[ FUNGSI UTAMA: MANAJEMEN API KEY ]====
 def show_api_key_manager():
+    # ====[ TAMPILKAN JUDUL HALAMAN DENGAN GAYA ]====
     st.markdown("""
         <style>
         .api-title {
@@ -24,30 +23,35 @@ def show_api_key_manager():
 
     st.caption("Masukkan dan kelola `App Key` dan `Auth Key` kamu dengan aman.")
 
+    # ====[ FUNGSI INPUT TOKEN & TOMBOL AKSI ]====
     def token_input(label, key_name):
         with st.expander(f"🔑 {label}", expanded=True):
+            # ====[ INPUT TOKEN ]====
             token_value = st.text_input(
-                f"{label}",
+                label,
                 value=st.session_state[key_name],
                 key=f"input_{key_name}",
                 type="password" if key_name == "authkey" else "default"
             )
 
+            # ====[ TOMBOL AKSI: SIMPAN / SALIN / HAPUS ]====
             col1, col2, col3 = st.columns(3)
+
             with col1:
-                if st.button(f"💾 Simpan", key=f"save_{key_name}"):
+                if st.button("💾 Simpan", key=f"save_{key_name}"):
                     st.session_state[key_name] = token_value
                     st.success(f"{label} berhasil disimpan!")
 
             with col2:
-                if st.button(f"📋 Salin", key=f"copy_{key_name}"):
-                    st.code(st.session_state[key_name]) 
+                if st.button("📋 Salin", key=f"copy_{key_name}"):
+                    st.code(st.session_state[key_name])
                     st.success(f"{label} disalin!")
 
             with col3:
-                if st.button(f"❌ Hapus", key=f"delete_{key_name}"):
+                if st.button("❌ Hapus", key=f"delete_{key_name}"):
                     st.session_state[key_name] = ""
                     st.warning(f"{label} dihapus.")
 
+    # ====[ FORM UNTUK APP KEY & AUTH KEY ]====
     token_input("App Key", "appkey")
     token_input("Auth Key", "authkey")
