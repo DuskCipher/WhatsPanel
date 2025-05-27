@@ -66,8 +66,20 @@ def scrape_search_serpapi(query, api_key, max_results):
 
 
 def maps_scraper_app():
-    st.title("🧭 SerpAPI Scraper: Maps & Search")
-
+    st.markdown("""
+        <style>
+        .analyzer-title {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+        </style>
+        <div class='analyzer-title'>🧭 SERP-API SCRAPER : MAPS & SEARCH</div>
+    """, unsafe_allow_html=True)
+    
     with st.expander("🔐 Masukkan API Key SerpAPI"):
         api_key = st.text_input("API Key", type="password", placeholder="Masukkan API Key SerpAPI kamu")
 
