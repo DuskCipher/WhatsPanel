@@ -122,6 +122,7 @@ from dashboard.terminal import show_terminal
 from dashboard.analisis_pengiriman import show_analisis_pengiriman
 from dashboard.kirim_pesan import show_kirim_pesan
 from dashboard.pengaturan_input import show_pengaturan_input
+from dashboard.maps_scraper_app import maps_scraper_app
 
 # ===[ SIDEBAR MENU ]===
 with st.sidebar:
@@ -130,11 +131,11 @@ with st.sidebar:
         [
             "Pengaturan & Input", "Kirim Pesan", "Analisis Pengiriman",
             "Terminal", "Tool Khusus Oli", "Script Tool",
-            "NotePad", "Manajemen API", "Logout",
+            "NotePad", "maps scraper", "Manajemen API", "Logout",
         ],
         icons=[
             "gear", "send", "bar-chart", "terminal", "droplet",
-            "code-slash", "journal-text", "key", "box-arrow-right",
+            "code-slash", "code-slash", "journal-text", "key", "box-arrow-right",
         ],
         menu_icon="chat-dots",
         default_index=0,
@@ -161,6 +162,7 @@ pages = {
     "Script Tool": show_script_tool,
     "NotePad": show_notepad,
     "Manajemen API": show_api_key_manager,
+    "maps scraper": maps_scraper_app,
 }
 
 if menu == "Logout":
