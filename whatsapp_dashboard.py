@@ -131,7 +131,7 @@ with st.sidebar:
         [
             "Pengaturan & Input", "Kirim Pesan", "Analisis Pengiriman",
             "Terminal", "Tool Khusus Oli", "Script Tool",
-            "NotePad", "maps scraper", "Manajemen API", "Logout",
+            "NotePad", "Maps Scraper", "Manajemen API", "Logout",
         ],
         icons=[
             "gear", "send", "bar-chart", "terminal", "droplet",
