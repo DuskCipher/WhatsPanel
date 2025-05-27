@@ -162,7 +162,7 @@ pages = {
     "Script Tool": show_script_tool,
     "NotePad": show_notepad,
     "Manajemen API": show_api_key_manager,
-    "maps scraper": maps_scraper_app,
+    "Maps Scraper": maps_scraper_app,
 }
 
 if menu == "Logout":
