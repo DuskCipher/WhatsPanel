@@ -60,15 +60,28 @@ def show_tool_oli():
     template_text = st.text_area("📄 Template Pesan", height=400, value="""
 🚗 Selamat pagi *{jenis} {nama}*,
 
-Semoga sehat selalu dan mobil *{jenis} {nama}* (kode: *{mobil}*) dalam kondisi terbaik. Aamiin.
+Semoga sehat selalu dan mobil *{jenis} {nama}* dengan plat no *{mobil}* dalam kondisi terbaik. Aamiin.
 
-Kami mengingatkan bahwa servis terakhir dilakukan pada *{tanggal_kunjungan}* di km *{kilometer}* di Bengkel Arumsari Purwokerto.
+Untuk Kami mengingatkan bahwa servis terakhir dilakukan pada *{tanggal_kunjungan}* di km *{kilometer}* di Bengkel Arumsari Purwokerto.
 
 Saatnya ganti oli agar mesin tetap awet dan performa optimal. Yuk booking servis online sesuai jadwal Anda!
 
-📍 Arumsari – Jl. Sultan Agung, Purwokerto  
+🔧 *Layanan Kami:*
+• Service Berkala
+• Ganti Oli & Tune Up
+• AC Mobil
+• Suspensi & Rem
+• Spooring & Balancing
+• Scanner & Nano Coating
+• Bubut Cakram
+• dan layanan lainnya
+
+📍 Bengkel Arum Sari Purwokerto 
+_Jl. Sultan Agung No.10, Karangklesem, Purwokerto  Selatan Kab. Banyumas_
+
 📞 0852-2148-6500  
-🗓 Booking: https://bengkelarumsari.com/booking-wa-as  
+
+📅 Booking: https://bengkelarumsari.com/booking-wa-as  
 📖 Artikel: https://bengkelkakimobil.com/telat-ganti-oli-mobil-ini-resikonya/
 
 Terima kasih atas kepercayaan *{jenis} {nama}* 💙
