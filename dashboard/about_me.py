@@ -1,58 +1,63 @@
 import streamlit as st
-from PIL import Image
-import requests
-from io import BytesIO
 
 def show_about_me():
     st.title("🧠 Tentang Kami")
-    st.markdown("Kolaborasi dua pengembang teknologi yang membangun sistem otomasi modern dan efisien.")
+    st.markdown("""
+    Selamat datang! Kami adalah dua pengembang teknologi yang berkolaborasi  
+    untuk membangun sistem **otomasi modern**, **berbasis AI**, dan **efisien**.  
+    Kami percaya pada kekuatan *open source* dan inovasi berkelanjutan. ✨
+    """)
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.header("👨‍💻 PMC Cyber")
+        st.subheader("👨‍💻 PMC Cyber")
         st.markdown("""
-        **PMC-Cyber** adalah pengembang sistem automasi dan pengelolaan API yang aktif dalam membangun aplikasi berbasis Python dan integrasi WhatsApp API.
+        `PMC-Cyber` adalah seorang **pengembang sistem automasi dan integrasi API**,  
+        dengan spesialisasi pada *command-line tools*, WhatsApp Bot, dan sistem backend.
 
-        - 🔧 Proyek utama: `PMC-Cyber`
-        - 📂 Fitur: Automasi, Terminal Interaktif, WhatsApp Bot
-        - 📌 Bahasa: Python, Shell Script
+        **🔧 Keahlian:**
+        - Automasi sistem & API handler
+        - Integrasi WhatsApp API
+        - Terminal tools interaktif berbasis Python & Shell
 
-        🔗 [GitHub: PMC-Cyber](https://github.com/PMC-Cyber)
+        **🧰 Tools:** Python, Shell Script, Linux CLI  
+        **🔗 GitHub:** [PMC-Cyber](https://github.com/PMC-Cyber)
         """)
-
-        try:
-            pmc_img_url = "https://avatars.githubusercontent.com/u/104304973?v=4"
-            pmc_img = Image.open(BytesIO(requests.get(pmc_img_url).content))
-            st.image(pmc_img, caption="PMC Cyber", width=150)
-        except:
-            st.warning("Profil PMC Cyber gagal dimuat.")
+        st.image(
+            "https://avatars.githubusercontent.com/u/104304973?v=4",
+            caption="PMC Cyber",
+            width=150
+        )
 
     with col2:
-        st.header("👨‍💻 DuskCipher")
+        st.subheader("👨‍💻 DuskCipher")
         st.markdown("""
-        **DuskCipher** adalah developer yang fokus pada analisis data, sistem AI, dan backend engineering, dengan beberapa proyek NLP dan data science.
+        `DuskCipher` adalah developer yang fokus pada **analisis data**, **AI/NLP**, dan **pengembangan backend**,  
+        dengan kontribusi nyata dalam sistem cerdas dan layanan data.
 
-        - 🧠 Fokus: Backend, Data Science, NLP
-        - 📂 Tools: Python, FastAPI, Pandas, Streamlit
-        - 🎯 Kontribusi: Otomasi & Integrasi AI
+        **🧠 Keahlian:**
+        - Natural Language Processing (NLP)
+        - Otomasi berbasis AI
+        - Backend & API Frameworks (FastAPI, Flask)
 
-        🔗 [GitHub: DuskCipher](https://github.com/DuskCipher)
+        **🧰 Tools:** Python, Pandas, Streamlit, FastAPI  
+        **🔗 GitHub:** [DuskCipher](https://github.com/DuskCipher)
         """)
-
-        try:
-            dusk_img_url = "https://avatars.githubusercontent.com/u/65213343?v=4"
-            dusk_img = Image.open(BytesIO(requests.get(dusk_img_url).content))
-            st.image(dusk_img, caption="DuskCipher", width=150)
-        except:
-            st.warning("Profil DuskCipher gagal dimuat.")
+        st.image(
+            "https://avatars.githubusercontent.com/u/65213343?v=4",
+            caption="DuskCipher",
+            width=150
+        )
 
     st.markdown("---")
     st.markdown("""
-    🚀 **Proyek ini adalah hasil kolaborasi antara PMC-Cyber & DuskCipher**,  
-    dua kreator yang berkomitmen untuk membangun aplikasi open-source yang bermanfaat dan scalable.
+    ### 🤝 Kolaborasi Kami
+    Proyek ini merupakan hasil kerja sama antara **PMC-Cyber** dan **DuskCipher**  
+    untuk membangun aplikasi **open-source** yang *bermanfaat, scalable*, dan siap dipakai secara profesional.
 
-    Terima kasih telah berkunjung ke dashboard kami! ❤️
+    > ❤️ Terima kasih telah mengunjungi dashboard kami.  
+    > Jangan lupa untuk mengeksplorasi proyek-proyek keren lainnya!
     """)
 
 if __name__ == "__main__":
