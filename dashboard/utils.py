@@ -5,6 +5,7 @@ def is_valid_wa_number(number):
     Validasi sederhana nomor WhatsApp.
     Harus berupa digit, mulai dengan '628', dan panjang minimal 10 digit.
     """
+    number = str(number)  # konversi ke string agar .isdigit() tidak error
     return number.isdigit() and number.startswith("628") and len(number) >= 10
 
 
