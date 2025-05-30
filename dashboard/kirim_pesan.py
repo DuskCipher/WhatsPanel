@@ -45,7 +45,8 @@ def show_kirim_pesan():
                 for idx, row in df_all.iterrows():
                     nama, nomor = row["Nama"], row["Nomor"]
                     msg = st.session_state.message_template.replace("{nama}", nama)
-                    cap = st.session_state.caption.replace("{nama}", nama)
+                    cap_template = st.session_state.get("caption", "")
+                    cap = cap_template.replace("{nama}", nama)
 
                     if image_file and image_url:
                         status_flag, response_detail = send_image_message(
