@@ -32,7 +32,7 @@ if not st.session_state.logged_in:
         st.markdown(
             """
             <div style="position: relative;">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgA2XeFUgIcaU0vFHJ7pE-PewzV1Nph_FJc4ETOpdF0mIENXNWe1OggrCmZtAN38y6M5URHJhwa9Et-DUkNwz_vU5Rn-HjzYnDBzYZmPOroWcuVbp4EkNTYvC8yd8VIzqEN6HeGwXPuiq9l6qvzO4j_gRYkyFH7kcUYLklR2F4NixHBKVExhMOXBYUN4xLb/s5760/Panel.png" style="width: 100%; border-radius: 10px;">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDGUaIBUbgSuu5UbhvyxZNYgqGGCIicLpnewEujh4jmDk1iAQX3l18kJ2mhOsnoVyW3N0dqktXqYcbcjdLDAmRNFhybx0ugVCH6LPkpzyrJneV6z1YGBT075x87HP9XdQf4R4pX9JB9tjm9Z0hYHwjijgRQWEzr2nkYr4mmrUjWi7bb5V9z1-9KRtP/s3600/Panel%20%281%29.jpg" style="width: 100%; border-radius: 10px;">
                 <a href='https://beacons.ai/riz_project' target='_blank'>
                     <button style='position: absolute; bottom: 40px; right: 40px; background-color: #00c851; color: white; font-size: 1rem; font-weight: bold; padding: 0.75rem 2rem; border-radius: 30px; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: 0.3s ease; cursor: pointer;' onmouseover="this.style.backgroundColor='#007E33'" onmouseout="this.style.backgroundColor='#00c851'">
                         🌐 Kunjungi Web saya
@@ -123,6 +123,7 @@ from dashboard.analisis_pengiriman import show_analisis_pengiriman
 from dashboard.kirim_pesan import show_kirim_pesan
 from dashboard.pengaturan_input import show_pengaturan_input
 from dashboard.maps_scraper_app import maps_scraper_app
+from dashboard.about_me import show_about_me
 
 # ===[ SIDEBAR MENU ]===
 with st.sidebar:
@@ -131,7 +132,7 @@ with st.sidebar:
         [
             "Pengaturan & Input", "Kirim Pesan", "Analisis Pengiriman",
             "Terminal", "Tool Khusus Oli", "Script Tool",
-            "NotePad", "Maps Scraper", "Manajemen API", "Logout",
+            "NotePad", "Maps Scraper", "Manajemen API", "Logout", "About Me",
         ],
         icons=[
             "gear", "send", "bar-chart", "terminal", "droplet",
@@ -163,6 +164,7 @@ pages = {
     "NotePad": show_notepad,
     "Manajemen API": show_api_key_manager,
     "Maps Scraper": maps_scraper_app,
+    "About Me": show_about_me,
 }
 
 if menu == "Logout":
