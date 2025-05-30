@@ -1,8 +1,17 @@
-# dashboard/utils.py
 import requests
-import json
+
+def is_valid_wa_number(number):
+    """
+    Validasi sederhana nomor WhatsApp.
+    Harus berupa digit, mulai dengan '628', dan panjang minimal 10 digit.
+    """
+    return number.isdigit() and number.startswith("628") and len(number) >= 10
+
 
 def send_text_message(number, message, appkey, authkey):
+    if not is_valid_wa_number(number):
+        return False, {"error": "Nomor tidak valid", "number": number}
+
     url = "https://app.wapanels.com/api/create-message"
     payload = {
         "appkey": appkey,
@@ -10,15 +19,31 @@ def send_text_message(number, message, appkey, authkey):
         "to": number,
         "message": message,
     }
+
     try:
         response = requests.post(url, data=payload)
-        response_data = response.json()
-        status_flag = response.status_code == 200 and response_data.get("status") == "success"
-        return status_flag, response_data
+        if response.status_code == 200:
+            try:
+                res_json = response.json()
+                if res_json.get("status", "").lower() == "success":
+                    return True, res_json
+                else:
+                    return False, {
+                        "error": "status != success",
+                        "response": res_json
+                    }
+            except Exception as e:
+                return False, {"error": "JSON Parsing Error", "exception": str(e)}
+        else:
+            return False, {"error": f"HTTP {response.status_code}", "text": response.text}
     except Exception as e:
-        return False, str(e)
+        return False, {"error": "Exception", "exception": str(e)}
+
 
 def send_image_message(number, caption, image_url, appkey, authkey):
+    if not is_valid_wa_number(number):
+        return False, {"error": "Nomor tidak valid", "number": number}
+
     url = "https://app.wapanels.com/api/create-message"
     payload = {
         "appkey": appkey,
@@ -27,10 +52,22 @@ def send_image_message(number, caption, image_url, appkey, authkey):
         "message": caption,
         "file": image_url,
     }
+
     try:
         response = requests.post(url, data=payload)
-        response_data = response.json()
-        status_flag = response.status_code == 200 and response_data.get("status") == "success"
-        return status_flag, response_data
+        if response.status_code == 200:
+            try:
+                res_json = response.json()
+                if res_json.get("status", "").lower() == "success":
+                    return True, res_json
+                else:
+                    return False, {
+                        "error": "status != success",
+                        "response": res_json
+                    }
+            except Exception as e:
+                return False, {"error": "JSON Parsing Error", "exception": str(e)}
+        else:
+            return False, {"error": f"HTTP {response.status_code}", "text": response.text}
     except Exception as e:
-        return False, str(e)
+        return False, {"error": "Exception", "exception": str(e)}
