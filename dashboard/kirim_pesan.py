@@ -1,4 +1,5 @@
 import time
+import math
 import pandas as pd
 from datetime import datetime
 import streamlit as st
@@ -43,20 +44,31 @@ def show_kirim_pesan():
                 total = len(df_all)
 
                 for idx, row in df_all.iterrows():
-                    nama, nomor = row["Nama"], row["Nomor"]
-                    msg = st.session_state.message_template.replace("{nama}", nama)
+                    nama, nomor_raw = row["Nama"], row["Nomor"]
+                    nama_str = "" if nama is None or (isinstance(nama, float) and math.isnan(nama)) else str(nama)
+
+                    # Konversi nomor ke string yang valid
+                    try:
+                        nomor_str = str(int(nomor_raw)).strip()
+                    except:
+                        nomor_str = str(nomor_raw).strip()
+
+                    if nomor_str.startswith("0"):
+                        nomor_str = "62" + nomor_str[1:]
+
+                    msg = st.session_state.message_template.replace("{nama}", nama_str)
                     cap_template = st.session_state.get("caption", "")
-                    cap = cap_template.replace("{nama}", nama)
+                    cap = cap_template.replace("{nama}", nama_str)
 
                     if image_file and image_url:
                         status_flag, response_detail = send_image_message(
-                            nomor, cap, image_url,
+                            nomor_str, cap, image_url,
                             st.session_state.appkey, st.session_state.authkey
                         )
                         pesan = cap
                     else:
                         status_flag, response_detail = send_text_message(
-                            nomor, msg,
+                            nomor_str, msg,
                             st.session_state.appkey, st.session_state.authkey
                         )
                         pesan = msg
@@ -88,7 +100,7 @@ def show_kirim_pesan():
                             <div style="color: #9ca3af; font-size: 13px;">🕒 {waktu}</div>
                             <div style="margin-top: 5px;">
                                 <span style="color: {warna_status}; font-weight: bold; font-size: 15px;">{icon} {status}</span>
-                                <span style="color: #e5e7eb; font-size: 15px;"> ke <strong>{nama}</strong> (<code>{nomor}</code>)</span><br>
+                                <span style="color: #e5e7eb; font-size: 15px;"> ke <strong>{nama_str}</strong> (<code>{nomor_str}</code>)</span><br>
                                 <span style="color: #f87171; font-size: 13px;">{error_detail}</span>
                             </div>
                         </div>
@@ -96,8 +108,8 @@ def show_kirim_pesan():
 
                     log.append({
                         "Waktu": waktu,
-                        "Nama": nama,
-                        "Nomor": nomor,
+                        "Nama": nama_str,
+                        "Nomor": nomor_str,
                         "Pesan": pesan,
                         "Status": status,
                     })
