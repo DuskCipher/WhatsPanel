@@ -124,6 +124,8 @@ from dashboard.kirim_pesan import show_kirim_pesan
 from dashboard.pengaturan_input import show_pengaturan_input
 from dashboard.maps_scraper_app import maps_scraper_app
 from dashboard.about_me import show_about_me
+from dashboard.unduh import show_unduh
+
 
 # ===[ SIDEBAR MENU ]===
 with st.sidebar:
@@ -132,11 +134,11 @@ with st.sidebar:
         [
             "Pengaturan & Input", "Kirim Pesan", "Analisis Pengiriman",
             "Terminal", "Tool Khusus Oli", "Script Tool",
-            "NotePad", "Maps Scraper", "Manajemen API", "Logout", "About Me",
+            "NotePad", "Maps Scraper", "Manajemen API", "About Me", "Download Tools", "Logout",
         ],
         icons=[
             "gear", "send", "bar-chart", "terminal", "droplet",
-            "code-slash", "code-slash", "journal-text", "key", "box-arrow-right",
+            "code-slash", "code-slash", "journal-text", "key", "person-circle", "download", "box-arrow-right",
         ],
         menu_icon="chat-dots",
         default_index=0,
@@ -165,6 +167,7 @@ pages = {
     "Manajemen API": show_api_key_manager,
     "Maps Scraper": maps_scraper_app,
     "About Me": show_about_me,
+    "Download Tools": show_unduh,
 }
 
 if menu == "Logout":
