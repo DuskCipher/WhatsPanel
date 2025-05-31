@@ -25,7 +25,7 @@ def show_about_me():
         **🔗 GitHub:** [PMC-Cyber](https://github.com/PMC-Cyber)
         """)
         st.image(
-            "https://avatars.githubusercontent.com/u/104304973?v=4",
+            "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEga5eDYld5sbd55wLG6hivx55kTmK5K5KeSNcm6VCwdtwg_h3u5zrBJ_Fm3XsQa9O0mDOKkedMgCyppPbkM2JZaI7udXCnrB1iQg7Nu72BGCsPh0m9OoQggPntnsGuhCd52jdC_oTyrvsgsBC4kDfmIxEtvBKnz7HI3wbQOtpJEIbGdLMNiJNld8Yl9ZSo8/s316/139885500.jpeg",
             caption="PMC Cyber",
             width=150
         )
@@ -45,7 +45,7 @@ def show_about_me():
         **🔗 GitHub:** [DuskCipher](https://github.com/DuskCipher)
         """)
         st.image(
-            "https://avatars.githubusercontent.com/u/65213343?v=4",
+            "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1JONQ8j3atX4bveKY2AVQjDKuHr3ZDe23M1J1bBcAwqPU_MaGyhSir4A4bA-dsvscx8maiOldxRWtfWY4XQrQD3RprZVqe1UXjjuJGs5TmKKIpdlb6EWME2hrJE9EExUi4Fn7rrp78NDn7qm53-BEzV-vQUm8pQJyNCFJBZskOP1CTkd53eMukB7vEC9E/s460/208228760.png",
             caption="DuskCipher",
             width=150
         )
