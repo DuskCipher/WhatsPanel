@@ -17,3 +17,4 @@ openpyxl
 webdriver-manager
 selenium
 yt-dlp
+ffmpeg-python
