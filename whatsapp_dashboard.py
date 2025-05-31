@@ -132,9 +132,9 @@ with st.sidebar:
     menu = option_menu(
         "Dashboard Panel",
         [
-            "Pengaturan & Input", "Kirim Pesan", "Analisis Pengiriman",
-            "Terminal", "Tool Khusus Oli", "Script Tool",
-            "NotePad", "Maps Scraper", "Manajemen API", "About Me", "Download Tools", "Logout",
+            "System Configuration", "Auto Message Sender", "Delivery Analytics",
+            "Command Console", "Oil Service Tools", "Script Executor",
+            "Quick Notes", "Location Data Extractor", "API Management", "Profile & Info", "Tool Downloads", "Sign Out",
         ],
         icons=[
             "gear", "send", "bar-chart", "terminal", "droplet",
@@ -157,20 +157,20 @@ with st.sidebar:
 
 # ===[ MENU ROUTING ]===
 pages = {
-    "Pengaturan & Input": show_pengaturan_input,
-    "Kirim Pesan": show_kirim_pesan,
-    "Analisis Pengiriman": show_analisis_pengiriman,
-    "Terminal": show_terminal,
-    "Tool Khusus Oli": show_tool_oli,
-    "Script Tool": show_script_tool,
-    "NotePad": show_notepad,
-    "Manajemen API": show_api_key_manager,
-    "Maps Scraper": maps_scraper_app,
-    "About Me": show_about_me,
-    "Download Tools": show_unduh,
+    "System Configuration": show_pengaturan_input,
+    "Auto Message Sender": show_kirim_pesan,
+    "Delivery Analytics": show_analisis_pengiriman,
+    "Command Console": show_terminal,
+    "Oil Service Tools": show_tool_oli,
+    "Script Executor": show_script_tool,
+    "Quick Notes": show_notepad,
+    "API Management": show_api_key_manager,
+    "Location Data Extractor": maps_scraper_app,
+    "Profile & Info": show_about_me,
+    "Tool Downloads": show_unduh,
 }
 
-if menu == "Logout":
+if menu == "Sign Out":
     for key in ["logged_in", "appkey", "authkey"]:
         st.session_state.pop(key, None)
     st.success("✅ Logout berhasil! Sampai jumpa.")
