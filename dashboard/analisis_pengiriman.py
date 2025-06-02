@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
@@ -25,10 +26,12 @@ def show_analisis_pengiriman():
         st.warning("⚠️ Belum ada data pengiriman untuk dianalisis.")
         return
 
-    # ====[ RINGKASAN STATISTIK ]====
+    # ====[ NORMALISASI STATUS DAN STATISTIK ]====
     st.subheader("📊 Ringkasan Statistik Pengiriman")
-    berhasil = sum(log_df['Status'].str.contains("✅"))
-    gagal = sum(log_df['Status'].str.contains("❌"))
+    log_df['Status_Normalized'] = log_df['Status'].str.lower().str.strip()
+
+    berhasil = sum(log_df['Status_Normalized'].str.contains("✅|berhasil", na=False))
+    gagal = sum(log_df['Status_Normalized'].str.contains("❌|gagal", na=False))
     total = len(log_df)
 
     col1, col2, col3 = st.columns(3)
@@ -61,14 +64,14 @@ def show_analisis_pengiriman():
         names=["Berhasil", "Gagal"],
         values=[berhasil, gagal],
         color_discrete_sequence=["#22c55e", "#ef4444"],
-        hole=0.4  # untuk donut chart
+        hole=0.4
     )
     pie_fig.update_layout(paper_bgcolor="#111111", font_color="white")
     st.plotly_chart(pie_fig, use_container_width=True)
 
     # ====[ TIMELINE PENGIRIMAN ]====
     st.subheader("⏱️ Timeline Pengiriman")
-    log_df['Waktu'] = pd.to_datetime(log_df['Waktu'], errors='coerce')  # konversi ke datetime
+    log_df['Waktu'] = pd.to_datetime(log_df['Waktu'], errors='coerce')
     fig_time = px.scatter(
         log_df,
         x="Waktu",
@@ -87,7 +90,6 @@ def show_analisis_pengiriman():
     st.subheader("📁 Unduh Data Log")
     col_csv, col_pdf = st.columns(2)
 
-    # — Download CSV
     with col_csv:
         csv_data = log_df.to_csv(index=False).encode("utf-8")
         st.download_button(
@@ -98,7 +100,6 @@ def show_analisis_pengiriman():
             use_container_width=True
         )
 
-    # — Generate & Download PDF
     with col_pdf:
         if st.button("📄 Generate PDF Laporan", use_container_width=True):
             pdf = FPDF()
@@ -107,7 +108,6 @@ def show_analisis_pengiriman():
             pdf.cell(200, 10, txt="Laporan Pengiriman WA", ln=True, align='C')
             pdf.ln(10)
 
-            # Tambahkan setiap log ke PDF
             for _, row in log_df.iterrows():
                 waktu = row.get('Waktu', '')
                 status = row.get('Status', '')
@@ -115,14 +115,14 @@ def show_analisis_pengiriman():
                 nomor = row.get('Nomor', '')
                 pdf.multi_cell(0, 10, txt=f"[{waktu}] {status} - {nama} ({nomor})", align='L')
 
-            pdf_output = "laporan_pengiriman.pdf"
+            pdf_output = "/mnt/data/laporan_pengiriman.pdf"
             pdf.output(pdf_output)
 
             with open(pdf_output, "rb") as f:
                 st.download_button(
                     "⬇️ Download PDF",
                     data=f.read(),
-                    file_name=pdf_output,
+                    file_name="laporan_pengiriman.pdf",
                     mime="application/pdf",
                     use_container_width=True
                 )
