@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: whatspanel
-    env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "streamlit run whatsapp_dashboard.py --server.port=10000"
